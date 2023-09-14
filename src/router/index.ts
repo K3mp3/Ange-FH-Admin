@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import LayoutVue from '@/views/Layout.vue'
+import Layout from "../views/Layout.vue";
+import SignInView from "../views/SignInView.vue";
+
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,12 +10,13 @@ const router = createRouter({
     {
       path: '/',
       name: 'Layout',
-      component: LayoutVue,
+      component: Layout,
       children: [
         {
-          path: "/admin",
-          name: "admin page",
-          component: AdminView,
+          path: '/',
+          name: 'sign in view',
+          component: SignInView,
+          meta: {index: true}
         },
       ]
     },
