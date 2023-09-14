@@ -1,5 +1,10 @@
 <script setup lang="ts">
     import { RouterLink } from "vue-router"
+    import { ref } from "vue";
+
+    const email = ref("");
+    const password = ref("");
+
 </script>
 
 <template>
@@ -9,10 +14,10 @@
             <span>Har du inget konto?<router-link to="/" class="router-link">Skapa ett här</router-link></span> 
             <form>
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Exempel@mail.se" class="text-input">
+                <input type="email" id="email" name="email" placeholder="Exempel@mail.se" class="text-input" v-model="email">
                 
                 <label for="password">Lösenord:</label>
-                <input type="password"  name="password" placeholder="Lösenord"  class="text-input">
+                <input type="password"  name="password" placeholder="Lösenord"  class="text-input" v-model="password">
                 <button type="submit">Skicka magic link</button>
             </form> 
         </div>
