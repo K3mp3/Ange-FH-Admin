@@ -2,9 +2,17 @@
     import { ref } from "vue";
 
     const formOpen = ref(false);
+    const emits = defineEmits(['hideSignInForm']);
+    
+    function emitHideSignInForm() {
+        formOpen.value = true;
+        emits('hideSignInForm', true); // Emit the event with the true value
+    }
 
     function showRegisterForm() {
         formOpen.value = true;
+
+        emitHideSignInForm();
     }
 </script>
 

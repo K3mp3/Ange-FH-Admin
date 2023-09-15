@@ -12,6 +12,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "gsap": "^3.12.2",
     "pinia": "^2.0.35",
     "sass": "^1.67.0",
     "vue": "^3.2.47",

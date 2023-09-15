@@ -4,11 +4,12 @@
     import AccountCreateForm from './AccountCreateForm.vue';
 
     const screenSize = ref();
+    const formOpen = ref(false);
+
     let width = document.documentElement.clientWidth;
 
     function controlScreenSize() {
         if (width > 1200) {
-            console.log("width", width);
             screenSize.value = true;
         } else {
             screenSize.value = false;
@@ -20,8 +21,6 @@
     }
 
     function init() {
-        console.log("hej");
-
         window.addEventListener("resize", updateScreenSize);
         window.addEventListener("resize", controlScreenSize);
 
@@ -31,6 +30,15 @@
             screenSize.value = true;
         } else {
             screenSize.value = false;
+        }
+    }
+
+    function hideSignInForm(isOpen: boolean) {
+        if (isOpen) {
+            console.log("works")
+        } else {
+            console.log("do not works");
+            
         }
     }
 
@@ -44,8 +52,8 @@
 
 <template>
     <div class="sign-in-form-container" :class="{ changeWidth: screenSize === true }">
-        <AccountCreateForm v-if="screenSize"></AccountCreateForm>
-        <AccountSignIn></AccountSignIn>
+        <AccountCreateForm v-if="screenSize" @hideSignInForm="hideSignInForm"></AccountCreateForm>
+        <AccountSignIn :isVisible="!formOpen"></AccountSignIn>
     </div>
 </template>
 
