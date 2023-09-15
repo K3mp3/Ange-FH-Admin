@@ -1,14 +1,16 @@
 <script setup lang="ts">
     import { RouterLink } from "vue-router"
-    import { ref } from "vue";
+    import { computed, ref } from "vue";
+    import { useFormStore } from "../../stores/store";
 
+    const formIsOpen = computed(() => useFormStore().formIsOpen);
     const email = ref("");
     const password = ref("");
 
 </script>
 
 <template>
-    <div class="form-parent-container">
+    <div class="form-parent-container" v-if="!formIsOpen">
         <div class="form-container">
             <h3>Logga in</h3>
             <span>Har du inget konto?<router-link to="/" class="router-link">Skapa ett här</router-link></span> 

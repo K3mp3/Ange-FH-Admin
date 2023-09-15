@@ -1,7 +1,8 @@
 <script setup lang="ts">
-    import { onMounted, ref } from 'vue';
-    import AccountSignIn from './AccountSignIn.vue';
-    import AccountCreateForm from './AccountCreateForm.vue';
+    import { onMounted, ref } from "vue";
+    import AccountSignIn from "./AccountSignIn.vue";
+    import AccountCreateForm from "./AccountCreateForm.vue";
+    import gsap from "gsap";
 
     const screenSize = ref();
     const formOpen = ref(false);
@@ -24,6 +25,8 @@
         window.addEventListener("resize", updateScreenSize);
         window.addEventListener("resize", controlScreenSize);
 
+
+
         updateScreenSize()
  
         if (width > 1200) {
@@ -36,6 +39,14 @@
     function hideSignInForm(isOpen: boolean) {
         if (isOpen) {
             console.log("works")
+            formOpen.value = true;
+        //     gsap.to(".account-sign-in", { x: 0, opacity: 1, duration: 0.5, onComplete: () => {
+        //     // Animation complete, you can choose to hide the component
+        //     // For example, set a timeout to hide it after the animation finishes
+        //     setTimeout(() => {
+        //         formOpen.value = true; // Hide the AccountSignIn component
+        //     }, 1000); // Adjust the timeout duration as needed
+        // } });
         } else {
             console.log("do not works");
             
@@ -53,7 +64,7 @@
 <template>
     <div class="sign-in-form-container" :class="{ changeWidth: screenSize === true }">
         <AccountCreateForm v-if="screenSize" @hideSignInForm="hideSignInForm"></AccountCreateForm>
-        <AccountSignIn :isVisible="!formOpen"></AccountSignIn>
+        <AccountSignIn></AccountSignIn>
     </div>
 </template>
 
