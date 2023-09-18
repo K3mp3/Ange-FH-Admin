@@ -45,6 +45,7 @@
                 font-size: 1.5rem;
                 font-weight: 600;
                 background: -webkit-linear-gradient(0deg, rgba(255, 123, 15,1) 0%, rgba(128,0,255,1) 100%);
+                background-clip: text;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }

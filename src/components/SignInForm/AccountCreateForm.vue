@@ -1,25 +1,16 @@
 <script setup lang="ts">
-    import { ref } from "vue";6
+    import { onMounted, ref } from "vue";
     import { useFormStore } from "../../stores/store";
 
     const formOpen = ref(false);
-    // const emits = defineEmits(['hideSignInForm']);
     const form = useFormStore();
-    
-    // function emitHideSignInForm() {
-    //     formOpen.value = true;
-    //     emits('hideSignInForm', true); // Emit the event with the true value
-    // }
 
     function showRegisterForm() {
         formOpen.value = true;
-
         form.formIsOpen = true;
-
         form.changeFormValue();
-
-        // emitHideSignInForm();
     }
+
 </script>
 
 <template>
@@ -102,7 +93,7 @@
             }
 
             .register-form {
-                max-width: 260px;
+                width: 260px;
                 margin: auto;
                 display: flex;
                 flex-direction: column;

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-    import { onMounted, ref } from "vue";
-    import AccountSignIn from "./AccountSignIn.vue";
+    import { computed, onMounted, ref } from "vue";
+    import AccountSignInForm from "./AccountSignInForm.vue";
     import AccountCreateForm from "./AccountCreateForm.vue";
-    import gsap from "gsap";
+import { useFormStore } from "@/stores/store";
 
     const screenSize = ref();
-    const formOpen = ref(false);
+    const formIsOpen = computed(() => useFormStore().formIsOpen);
 
     let width = document.documentElement.clientWidth;
-
+    
     function controlScreenSize() {
         if (width > 1200) {
             screenSize.value = true;
@@ -25,31 +25,12 @@
         window.addEventListener("resize", updateScreenSize);
         window.addEventListener("resize", controlScreenSize);
 
-
-
-        updateScreenSize()
+        updateScreenSize();
  
         if (width > 1200) {
             screenSize.value = true;
         } else {
             screenSize.value = false;
-        }
-    }
-
-    function hideSignInForm(isOpen: boolean) {
-        if (isOpen) {
-            console.log("works")
-            formOpen.value = true;
-        //     gsap.to(".account-sign-in", { x: 0, opacity: 1, duration: 0.5, onComplete: () => {
-        //     // Animation complete, you can choose to hide the component
-        //     // For example, set a timeout to hide it after the animation finishes
-        //     setTimeout(() => {
-        //         formOpen.value = true; // Hide the AccountSignIn component
-        //     }, 1000); // Adjust the timeout duration as needed
-        // } });
-        } else {
-            console.log("do not works");
-            
         }
     }
 
@@ -62,14 +43,14 @@
 </script>
 
 <template>
-    <div class="sign-in-form-container" :class="{ changeWidth: screenSize === true }">
-        <AccountCreateForm v-if="screenSize" @hideSignInForm="hideSignInForm"></AccountCreateForm>
-        <AccountSignIn></AccountSignIn>
+    <div class="account-form-parent-container" :class="{ changeWidth: screenSize === true, Test: formIsOpen === true }">
+        <AccountCreateForm v-if="screenSize"></AccountCreateForm>
+        <AccountSignInForm></AccountSignInForm>
     </div>
 </template>
 
-<style scoped>
-    .sign-in-form-container {
+<style scoped lang="scss">
+    .account-form-parent-container {
         width: 100%;
         max-width: 500px;
         background-color: #1F1F1F;
@@ -87,4 +68,9 @@
         max-width: 900px;
     }
 
+    .Test{
+        background-color: aqua;
+        max-width: 500px;
+        margin: auto;
+    }
 </style>
