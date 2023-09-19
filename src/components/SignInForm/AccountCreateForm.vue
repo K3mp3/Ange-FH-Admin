@@ -1,14 +1,24 @@
 <script setup lang="ts">
-    import { onMounted, ref } from "vue";
+    import { ref } from "vue";
     import { useFormStore } from "../../stores/store";
+import { registerUserStore } from "@/stores/registerUser";
 
     const formOpen = ref(false);
     const form = useFormStore();
+    const user = registerUserStore();
+    const email = ref("");
+    const password = ref("");
 
     function showRegisterForm() {
         formOpen.value = true;
         form.formIsOpen = true;
         form.changeFormValue();
+    }
+
+    function sendUserData() {
+        console.log(email.value, password.value);
+        user.email = email.value;
+        user.password = password.value
     }
 
 </script>
@@ -26,7 +36,7 @@
 
             <div class="register-form" v-if="formOpen">
                 <h3>Skapa konto</h3>
-                <form>
+                <form @submit.prevent="sendUserData">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" placeholder="Exempel@mail.se" class="text-input" v-model="email">
                     
