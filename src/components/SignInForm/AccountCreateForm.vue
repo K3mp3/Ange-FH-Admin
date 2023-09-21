@@ -1,11 +1,11 @@
 <script setup lang="ts">
-    import { ref } from "vue";
+    import { computed, ref } from "vue";
     import { useFormStore } from "../../stores/store";
-import { registerUserStore } from "@/stores/registerUser";
+    import { registerUser } from "../../services/userService"
+
 
     const formOpen = ref(false);
     const form = useFormStore();
-    const user = registerUserStore();
     const email = ref("");
     const password = ref("");
 
@@ -15,10 +15,26 @@ import { registerUserStore } from "@/stores/registerUser";
         form.changeFormValue();
     }
 
+    const newUser = computed(() => {
+        return {
+            email: email.value,
+            password: password.value
+        };
+    });
+
+    async function handleRegistration() {
+    try {
+        console.log(newUser.value);
+        const registeredUser = await registerUser(newUser.value);
+        console.log("User reigstered:", registeredUser)
+    } catch (error) {
+        console.log("Error handling users:", error);   
+    }
+}
+
     function sendUserData() {
         console.log(email.value, password.value);
-        user.email = email.value;
-        user.password = password.value
+        handleRegistration();
     }
 
 </script>
