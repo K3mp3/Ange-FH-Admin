@@ -3,7 +3,6 @@
     import { useFormStore } from "../../stores/store";
     import { registerUser } from "../../services/userService"
 
-
     const formOpen = ref(false);
     const form = useFormStore();
     const email = ref("");
@@ -24,7 +23,8 @@
 
     async function handleRegistration() {
     try {
-        const registeredUser = await registerUser(newUser.value);
+        const response = await registerUser(newUser.value);
+        console.log(response);
     } catch (error) {
         console.log("Error handling users:", error);   
     }

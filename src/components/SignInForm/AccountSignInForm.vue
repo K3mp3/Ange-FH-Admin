@@ -11,13 +11,13 @@ import { signInUser } from "@/services/userService";
     const newUser = computed(() => {
         return {
             email: email.value,
-            password: password.value
+            password: password.value,
         };
     });
 
     async function handleSignIn() {
         try {
-            const signedInUser = await signInUser(newUser.value);
+            const response = await signInUser(newUser.value);
         } catch (error) {
             console.log("Error handling users:", error); 
         }
