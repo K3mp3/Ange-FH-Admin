@@ -2,10 +2,26 @@
     import { RouterLink } from "vue-router"
     import { computed, ref } from "vue";
     import { useFormStore } from "../../stores/store";
+import { signInUser } from "@/services/userService";
 
     const formIsOpen = computed(() => useFormStore().formIsOpen);
     const email = ref("");
     const password = ref("");
+
+    const newUser = computed(() => {
+        return {
+            email: email.value,
+            password: password.value
+        };
+    });
+
+    async function handleSignIn() {
+        try {
+            const signedInUser = await signInUser(newUser.value);
+        } catch (error) {
+            console.log("Error handling users:", error); 
+        }
+    }
 
 </script>
 
@@ -14,7 +30,7 @@
         <div class="form-container">
             <h3>Logga in</h3>
             <span>Har du inget konto?<router-link to="/" class="router-link">Skapa ett här</router-link></span> 
-            <form>
+            <form @submit.prevent="handleSignIn">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="Exempel@mail.se" class="text-input" v-model="email">
                 

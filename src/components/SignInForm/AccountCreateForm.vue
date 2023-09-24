@@ -24,9 +24,7 @@
 
     async function handleRegistration() {
     try {
-        console.log(newUser.value);
         const registeredUser = await registerUser(newUser.value);
-        console.log("User reigstered:", registeredUser)
     } catch (error) {
         console.log("Error handling users:", error);   
     }
@@ -36,7 +34,6 @@
         console.log(email.value, password.value);
         handleRegistration();
     }
-
 </script>
 
 <template>
