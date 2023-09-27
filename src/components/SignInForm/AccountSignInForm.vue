@@ -2,11 +2,14 @@
     import { RouterLink } from "vue-router"
     import { computed, ref } from "vue";
     import { useFormStore } from "../../stores/store";
-import { signInUser } from "@/services/userService";
+    import { signInUser } from "@/services/userService";
+    import { useSignInStore } from "@/stores/signIn";
 
     const formIsOpen = computed(() => useFormStore().formIsOpen);
+    const signedIn = computed(() => useSignInStore().singedIn)
     const email = ref("");
     const password = ref("");
+    const isSignedIn = ref(false)
 
     const newUser = computed(() => {
         return {
@@ -18,6 +21,11 @@ import { signInUser } from "@/services/userService";
     async function handleSignIn() {
         try {
             const response = await signInUser(newUser.value);
+            console.log(signedIn.value);
+            if (signedIn.value) {
+                console.log("hej");
+                isSignedIn.value = true;
+            }
         } catch (error) {
             console.log("Error handling users:", error); 
         }

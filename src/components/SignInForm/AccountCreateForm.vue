@@ -22,13 +22,10 @@
     });
 
     async function handleRegistration() {
-    try {
         const response = await registerUser(newUser.value);
         console.log(response);
-    } catch (error) {
-        console.log("Error handling users:", error);   
+        
     }
-}
 
     function sendUserData() {
         console.log(email.value, password.value);
