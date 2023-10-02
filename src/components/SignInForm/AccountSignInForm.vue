@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { RouterLink } from "vue-router"
-    import { computed, ref } from "vue";
+    import { computed, onMounted, ref } from "vue";
     import { useFormStore } from "../../stores/store";
     import { signInUser } from "@/services/userService";
     import { useSignInStore } from "@/stores/signIn";
@@ -23,13 +23,16 @@
             const response = await signInUser(newUser.value);
             console.log(signedIn.value);
             if (signedIn.value) {
-                console.log("hej");
                 isSignedIn.value = true;
             }
         } catch (error) {
             console.log("Error handling users:", error); 
         }
     }
+
+    onMounted(() => {
+        console.log(signedIn.value);
+    })
 
 </script>
 

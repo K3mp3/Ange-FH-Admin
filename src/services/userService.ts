@@ -21,7 +21,8 @@ export async function signInUser(user: IUser) {
     try {
         const response = await axios.post<IUser>(`${BASE_URL}/users/loginuser`, user);  
         userStore.singedIn = true;
-
+        userStore.signInUser();
+        
         return response.data;
 
     } catch (error) {

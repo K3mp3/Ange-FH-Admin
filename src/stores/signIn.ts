@@ -4,9 +4,9 @@ import { ref } from "vue";
 export const useSignInStore = defineStore("signInUser", () => {
     const singedIn = ref(false);
 
-    function signInUserStore() {
+    function signInUser() {
         const singedIn = ref(true);
     }
 
-    return { singedIn, signInUserStore };
+    return { singedIn, signInUser };
 })
