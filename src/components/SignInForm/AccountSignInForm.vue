@@ -4,6 +4,7 @@
     import { useFormStore } from "../../stores/store";
     import { signInUser } from "@/services/userService";
     import { useSignInStore } from "@/stores/signIn";
+import AccountWriteToken from "./AccountWriteToken.vue";
 
     const formIsOpen = computed(() => useFormStore().formIsOpen);
     const signedIn = computed(() => useSignInStore().singedIn)
@@ -29,11 +30,6 @@
             console.log("Error handling users:", error); 
         }
     }
-
-    onMounted(() => {
-        console.log(signedIn.value);
-    })
-
 </script>
 
 <template>
