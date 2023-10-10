@@ -66,7 +66,7 @@
         /* background: rgb(0,133,255);
         background: linear-gradient(90deg, rgba(0,133,255,1) 0%, rgba(128,0,255,1) 100%); */
         margin: auto;
-        border-radius: 20px;
+        
         box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         display: flex;
         justify-content: space-between;
@@ -87,5 +87,11 @@
         left: 0;
         display: flex;
         justify-content: center;
+    }
+
+    @media (min-width: 505px) {
+        .account-form-parent-container {
+            border-radius: 20px;
+        }
     }
 </style>

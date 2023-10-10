@@ -53,6 +53,9 @@ import AccountWriteToken from "./AccountWriteToken.vue";
 
     .form-parent-container {
         width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
         padding: 20px;
 
         .form-container {
@@ -61,6 +64,7 @@ import AccountWriteToken from "./AccountWriteToken.vue";
             display: flex;
             flex-direction: column;
             gap: 50px;
+            width: 100%;
 
             h3 {
                 color: #F1F1F1;
@@ -118,20 +122,37 @@ import AccountWriteToken from "./AccountWriteToken.vue";
             }
 
             button {
-                padding: 10px 0;
+                padding: 12px 0;
                 border: none;
                 background-color: #F1F1F1;
-                /* color: #F1F1F1; */
                 font-family: Verdana;
                 border-radius: 20px;
+                width: 100%;
+                color: #292929;
+                transition: all 0.5s;
+                -webkit-transition: all 0.5s;
 
-                &:hover {
+                /* &:hover {
                     transition: all 0.2s ease-in-out;
                     background: #ff7b0f;
                     cursor: pointer;
                     color: #F1F1F1;
+                } */
+
+                &:active {
+                    background-color: #bbbaba;
+                    transition: all 0.25s;
+                    -webkit-transition: all 0.25s;
+                    box-shadow: none;
+                    transform: scale(0.97);
                 }
             }
+        }
+    }
+
+    @media (min-width: 505px) {
+        .form-parent-container {
+            height: auto;
         }
     }
 </style>
