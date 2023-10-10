@@ -7,6 +7,8 @@
     import { useSignInStore } from "@/stores/signIn";
 
     const screenSize = ref();
+    const showRegisterForm = ref(false);
+    const hideSignIn = ref(true);
     const formIsOpen = computed(() => useFormStore().formIsOpen);
     const signedIn = computed(() => useSignInStore().singedIn)
 
@@ -37,6 +39,12 @@
         }
     }
 
+    function showCreateAccountForm(clickedRegister: boolean) {
+        showRegisterForm.value = clickedRegister;
+        hideSignIn.value = false;
+        console.log(showRegisterForm.value);
+    }
+
     onMounted(() => {
         init();
         controlScreenSize();
@@ -49,7 +57,8 @@
 <template>
     <div class="account-form-parent-container" :class="{ changeWidth: screenSize === true, Test: formIsOpen === true }">
         <AccountCreateForm v-if="screenSize"></AccountCreateForm>
-        <AccountSignInForm></AccountSignInForm>
+        <AccountCreateForm v-if="showRegisterForm"></AccountCreateForm>
+        <AccountSignInForm v-if="hideSignIn" @createaccount="showCreateAccountForm"></AccountSignInForm>
     </div>
     <div class="background-container" v-if="signedIn">
         <AccountWriteToken>

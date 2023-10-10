@@ -1,16 +1,21 @@
 <script setup lang="ts">
     import { RouterLink } from "vue-router"
-    import { computed, onMounted, ref } from "vue";
+    import { computed, ref } from "vue";
     import { useFormStore } from "../../stores/store";
     import { signInUser } from "@/services/userService";
     import { useSignInStore } from "@/stores/signIn";
-import AccountWriteToken from "./AccountWriteToken.vue";
 
     const formIsOpen = computed(() => useFormStore().formIsOpen);
     const signedIn = computed(() => useSignInStore().singedIn)
     const email = ref("");
     const password = ref("");
-    const isSignedIn = ref(false)
+    const isSignedIn = ref(false);
+
+    const emits = defineEmits<{ (e: "createaccount", username: boolean): void }>();
+
+    function registerUser() {
+        emits ("createaccount", true);
+    }
 
     const newUser = computed(() => {
         return {
@@ -36,14 +41,14 @@ import AccountWriteToken from "./AccountWriteToken.vue";
     <div class="form-parent-container" v-if="!formIsOpen">
         <div class="form-container">
             <h3>Logga in</h3>
-            <span>Har du inget konto?<router-link to="/" class="router-link">Skapa ett här</router-link></span> 
+            <p>Har du inget konto? Skapa ett <button type="button" @click="registerUser" class="register-btn">här</button></p> 
             <form @submit.prevent="handleSignIn">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="Exempel@mail.se" class="text-input" v-model="email">
                 
                 <label for="password">Lösenord:</label>
                 <input type="password"  name="password" placeholder="Lösenord"  class="text-input" v-model="password">
-                <button type="submit">Skicka magic link</button>
+                <button type="submit" class="sign-in-btn">Skicka magic link</button>
             </form> 
         </div>
     </div>
@@ -77,20 +82,27 @@ import AccountWriteToken from "./AccountWriteToken.vue";
                 -webkit-text-fill-color: transparent;
             }
 
-            span {
+            p {
                 display: flex;
                 flex-direction: column;
                 color: #F1F1F1;
                 font-family: Verdana;
                 line-height: 1.5rem;
 
-                .router-link {
-                    text-decoration: none;
-                    color: #F1F1F1;
+                .register-btn {
+                    background: transparent;
+                    border: none;
+                    color: #ff7b0f;
+                    text-align: left;
+                    font-family: Verdana;
+                    font-size: 1rem;
+                    padding: 0;
+                    width: 28px;
 
                     &:hover {
                         transition: all 0.2s ease-in-out;
                         color: #F1F1F1;
+                        cursor: pointer;
                     }
                 }
             }
@@ -121,7 +133,7 @@ import AccountWriteToken from "./AccountWriteToken.vue";
                 border-bottom: 1px solid #ff7b0f;
             }
 
-            button {
+            .sign-in-btn {
                 padding: 12px 0;
                 border: none;
                 background-color: #F1F1F1;
